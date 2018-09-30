@@ -1,0 +1,287 @@
+=============================
+Portal Transaccional Cookbook
+=============================
+
+
+Table of contents
+=================
+1. User Data Access
+  1.1 What you’ll need
+  1.2 Create the database
+  1.3 Create the directory structure
+  1.4 Create the pom.xml file
+  1.5 Create the application.properties file
+  1.6 Create the @Entity model
+  1.7 Create the repository
+  1.8 Create the controller
+
+
+1. User Data Access
+===================
+This is a Spring application connected with a MySQL Database. It uses Spring Data JPA to access the database.
+
+
+1.1 What you’ll need
+--------------------
+- MySql
+- Java
+- Maven
+- Spring
+
+
+1.2 Create the database
+-----------------------
+Open MySQL client with a user that can create new users.
+
+Create a new database:
+mysql> create database user_data;
+mysql> create user 'userdataaccess'@'localhost' identified by 'userdataaccesspwd';
+mysql> grant all on user_data.* to 'userdataaccess'@'localhost';
+
+
+1.3 Create the directory structure
+----------------------------------
+Create the following directory structure:
+
+user-data-access
+└─src
+  └─main
+    ├─java
+    │ └─userdataaccess
+	└─resources
+
+
+1.4 Create the pom.xml file
+---------------------------
+Create the pom.xml file inside the user-data-access directory with the following content:
+
+........
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>userdataaccess</groupId>
+    <artifactId>user-data-access</artifactId>
+    <version>0.0.1</version>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.0.5.RELEASE</version>
+    </parent>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- JPA Data (We are going to use Repositories, Entities, Hibernate, etc...) -->
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <!-- Use MySQL Connector-J -->
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
+........
+
+
+1.5 Create the application.properties file
+------------------------------------------
+Create the src/main/resources/application.properties file with the following content:
+
+........
+spring.jpa.hibernate.ddl-auto=create
+spring.datasource.url=jdbc:mysql://localhost:3306/user_data
+spring.datasource.username=userdataaccess
+spring.datasource.password=userdataaccesspwd
+........
+
+Here, spring.jpa.hibernate.ddl-auto can be none, update, create, create-drop:
+- none: no change to the database structure.
+- update: Hibernate changes the database according to the given Entity structures.
+- create: Creates the database every time, but don’t drop it when close.
+- create-drop: Creates the database then drops it when the SessionFactory closes.
+
+**** IMPORTANT ****
+We here begin with create because we don’t have the database structure yet. After the first run, we could switch it to none.
+
+It is good security practice that after your database is in production state, you make this none and revoke all privileges from the MySQL user connected to the Spring application, then give him only SELECT, UPDATE, INSERT, DELETE.
+
+
+1.6 Create the @Entity model
+----------------------------
+
+Entity model:
+- email (primary key)
+- name
+- id_type
+- id_number
+- birthday
+- state
+- city
+- address
+- home_phone
+- cell_phone
+
+Create the src/main/java/userdataaccess/User.java file:
+
+........
+package userdataaccess;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
+public class User {
+    @Id
+    private String email;
+	private String name;
+	private String id_type;
+	private String id_number;
+	private Date birthday;
+	private String state;
+	private String city;
+	private String address;
+	private String home_phone;
+	private String cell_phone;
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getId_type() {
+		return id_type;
+	}
+
+	public void setId_type(String id_type) {
+		this.id_type = id_type;
+	}
+
+	public String getId_number() {
+		return id_number;
+	}
+
+	public void setId_number(String id_number) {
+		this.id_number = id_number;
+	}
+
+	public Date getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getHome_phone() {
+		return home_phone;
+	}
+
+	public void setHome_phone(String home_phone) {
+		this.home_phone = home_phone;
+	}
+
+	public String getCell_phone() {
+		return cell_phone;
+	}
+
+	public void setCell_phone(String cell_phone) {
+		this.cell_phone = cell_phone;
+	}
+}
+........
+
+
+1.7 Create the repository
+-------------------------
+Create the src/main/java/userdataaccess/UserRepository.java file:
+
+........
+package userdataaccess;
+
+import org.springframework.data.repository.CrudRepository;
+
+import userdataaccess.User;
+
+// This will be AUTO IMPLEMENTED by Spring into a Bean called userRepository
+// CRUD refers Create, Read, Update, Delete
+
+public interface UserRepository extends CrudRepository<User, Integer> {
+
+}
+........
+
+This is the repository interface, this will be automatically implemented by Spring in a bean with the same name with changing case. The bean name will be userRepository.
+
+
+1.8 Create the controller
+-------------------------
+
