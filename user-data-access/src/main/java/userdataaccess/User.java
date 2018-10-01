@@ -5,7 +5,7 @@ import javax.persistence.Id;
 import javax.persistence.Column;
 import java.sql.Date;
 
-@Entity
+@Entity // This tells Hibernate to make a table out of this class
 public class User {
 	@Id
 	@Column(length = 64)
