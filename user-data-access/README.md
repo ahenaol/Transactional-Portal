@@ -15,13 +15,13 @@ El componete expone un servicio web que permite consultar y agregar/actualizar l
 
 ## Cómo empezar
 
-Este componente está construido en Java haciendo uso de Maven y Spring, haciendo uso de una base de datos en MySQL.
+Este componente está construido en Java haciendo uso de Maven y Spring, y una base de datos en MySQL.
 
 ### Prerrequisitos
 
 Instalar y configurar:
-[Maven](https://maven.apache.org/) - Gestión de dependencias
-[MySQL](https://www.mysql.com/) - Base de datos relacional
+- [Maven](https://maven.apache.org/) - Gestión de dependencias
+- [MySQL](https://www.mysql.com/) - Base de datos relacional
 
 ### Crear la base de datos
 
@@ -53,8 +53,8 @@ Para la primera ejecución se debe fijar la propiedad en `create` debido a que n
 ### Compilar y empaquetar con Maven
 
 ```
-mvn comile
-mvn package
+$ mvn compile
+$ mvn package
 ```
 
 Esto debe compilar la aplicación y luego generar el archivo `jar` en la carpeta `target`.
@@ -63,19 +63,19 @@ Esto debe compilar la aplicación y luego generar el archivo `jar` en la carpeta
 
 Una forma simple de probar la aplicación es utilizando el soporte embebido que tiene Spring para correr un ambiente de ejecución Tomcat. Esto fue configurado en el archivo `src/main/java/userdataaccess/Application.java`. Simplemente ejecutamos el archivo ´jar´:
 
-´´´
+```
 java -jar target\user-data-access-0.0.1.jar
-´´´
+```
 
 Al ejecutar la aplicación se inicia Tomcat en el pueto 8080. Se puede probar la aplicación con Curl o Postman.
 
-Para crear/actualizar la información del usuario alejo.catson@gmail.com:
+Para crear/actualizar la información del usuario `alejo.catson@gmail.com`:
 
 ```
 localhost:8080/userdataaccess/add?email=alejo.catson@gmail.com&name=Alejo Catson&idType=CC&idNumber=111222333&birthday=1980-06-28&state=Antioquia&city=Medellín&address=Crr. 14 No. 15-16&homePhone=3332211&cellPhone=3004442211
 ```
 
-Para consultar la información del usuario alejo.catson@gmail.com:
+Para consultar la información del usuario `alejo.catson@gmail.com`:
 
 ```
 localhost:8080/userdataaccess/getUser?email=alejo.catson@gmail.com
