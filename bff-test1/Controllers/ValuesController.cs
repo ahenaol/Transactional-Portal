@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -21,11 +22,12 @@ namespace bff_test1.Controllers
             return new string[] { "value1", "value2" };
         }
 
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Object>> Get(int id)
+        // GET api/values/get?email=alejo@gmail.com
+        [HttpGet("get/")]
+        public async Task<ActionResult<Object>> Get([Required][FromQuery(Name = "email")] String email)
         {
-            var request = new HttpRequestMessage(HttpMethod.Get, "http://localhost:8080/userdataaccess/get?email=nata@gmail.com");
+            var uri = "http://localhost:8080/userdataaccess/get?email=" + email;
+            var request = new HttpRequestMessage(HttpMethod.Get, uri);
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("User-Agent", "Transactional-Portal");
 
