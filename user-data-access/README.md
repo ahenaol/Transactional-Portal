@@ -41,9 +41,9 @@ Se creó la base de datos **userdataaccess** y el usuario **userdataaccess**, co
 
 En el archivo `src/main/resources/application.properties`, la propiedad `spring.jpa.hibernate.ddl-auto` puede fijarse en `none`, `update`, `create` o `create-drop`.
 
-`none`: no cambia la estructura de la base de datos.
-`update`: Hibernate cambia la base de datos de acuerdo con las estructuras dadas por la Entidad.
-`create`: crea la base de datos cada vez, pero no la borra al cerrar.
+`none`: no cambia la estructura de la base de datos.  
+`update`: Hibernate cambia la base de datos de acuerdo con las estructuras dadas por la Entidad.  
+`create`: crea la base de datos cada vez, pero no la borra al cerrar.  
 `create-drop`: crea la base de datos y luego la borra cuando se cierra SessionFactory.
 
 Para la primera ejecución se debe fijar la propiedad en `create` debido a que no se tiene todavía creada la estructura. Luego de la primera ejecución, se debe fijar la propiedad en `none`.
