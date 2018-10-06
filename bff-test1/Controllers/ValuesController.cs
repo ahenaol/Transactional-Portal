@@ -21,7 +21,9 @@ namespace bff_test1.Controllers
             return new string[] { "value1", "value2" };
         }
 
-        private static async Task<HttpResponseMessage> CallService()
+        // GET api/values/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Object>> Get(int id)
         {
             var request = new HttpRequestMessage(HttpMethod.Get, "http://localhost:8080/userdataaccess/get?email=nata@gmail.com");
             request.Headers.Add("Accept", "application/json");
@@ -32,13 +34,14 @@ namespace bff_test1.Controllers
             // HttpClient client = new HttpClient(handler);
             HttpClient client = new HttpClient();
 
+            HttpResponseMessage response;
             try
             {
-                return await client.SendAsync(request);
+                response = await client.SendAsync(request);
             }
             catch(HttpRequestException e)
             {
-                return new HttpResponseMessage(HttpStatusCode.GatewayTimeout)
+                response = new HttpResponseMessage(HttpStatusCode.GatewayTimeout)
                 {
                     Content = new StringContent(e.Message),
                     StatusCode = HttpStatusCode.InternalServerError,
@@ -46,13 +49,6 @@ namespace bff_test1.Controllers
                 };
             }
             
-        }
-
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public ActionResult<Object> Get(int id)
-        {
-            var response = CallService().Result;
             var content = response.Content.ReadAsStringAsync();
 
             if (!response.IsSuccessStatusCode)
