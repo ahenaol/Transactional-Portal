@@ -23,38 +23,57 @@ namespace bff_test1.Controllers
 
         private static async Task<HttpResponseMessage> CallService()
         {
-            var handler = new HttpClientHandler();
-            handler.Proxy = new WebProxy("http://proxy.epm.com.co:8080", true) { UseDefaultCredentials = true };
-            HttpClient client = new HttpClient(handler);
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.DefaultRequestHeaders.Add("User-Agent", "Transactional Portal");
+            var request = new HttpRequestMessage(HttpMethod.Get, "http://localhost:8080/userdataaccess/get?email=nata@gmail.com");
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("User-Agent", "Transactional-Portal");
 
-            // var stringTask = client.GetStringAsync(
-            //     "http://localhost:8080/userdataaccess/get?email2=alejo.catson@gmail.com");
-            // var msg = await stringTask;
-            // return msg;
-            var response = await client.SendAsync(
-                new HttpRequestMessage(HttpMethod.Get,
-                    new Uri("http://localhost:8080/userdataaccess/get?email=alejo.catson@gmail.com")));
-            return response;
+            // var handler = new HttpClientHandler();
+            // handler.Proxy = new WebProxy("http://proxy.epm.com.co:8080", true) { UseDefaultCredentials = true };
+            // HttpClient client = new HttpClient(handler);
+            HttpClient client = new HttpClient();
+
+            try
+            {
+                return await client.SendAsync(request);
+            }
+            catch(HttpRequestException e)
+            {
+                return new HttpResponseMessage(HttpStatusCode.GatewayTimeout)
+                {
+                    Content = new StringContent(e.Message),
+                    StatusCode = HttpStatusCode.InternalServerError,
+                    RequestMessage = request
+                };
+            }
+            
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public ActionResult<String> Get(int id)
+        public ActionResult<Object> Get(int id)
         {
-            var content = CallService().Result.Content;
-            return "hola";
-            // try
-            // {
-            //     return JsonConvert.DeserializeObject(CallService().Result);
-            // }
-            // catch (HttpRequestException e)
-            // {
-            //     Console.WriteLine("----> " + e.Data.Keys);
-            //     return StatusCode(500);
-            // }
+            var response = CallService().Result;
+            var content = response.Content.ReadAsStringAsync();
+
+            if (!response.IsSuccessStatusCode)
+            {
+                this.HttpContext.Response.StatusCode = 500;
+
+                Console.WriteLine("* * * * * * * *");
+                Console.WriteLine("Request Message:");
+                Console.WriteLine("================");
+                Console.WriteLine(response.RequestMessage);
+                Console.WriteLine();
+                Console.WriteLine("Response Message:");
+                Console.WriteLine("================");
+                Console.WriteLine(content.Result);
+                Console.WriteLine();
+                Console.WriteLine("* * * * * * * *");
+
+                return null;
+            }
+
+            return JsonConvert.DeserializeObject(content.Result);
         }
 
         // POST api/values
