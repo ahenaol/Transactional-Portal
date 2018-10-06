@@ -82,3 +82,7 @@ localhost:8080/userdataaccess/getUser?email=alejo.catson@gmail.com
 ```
 
 Si el usuario existe, el servidor responde con un código `200 OK` y un JSON con la información del usuario. En caso contrario, el servidor responde con un código `204 No Content`.
+
+## Referencias
+
+- [spring.io](https://spring.io/guides/gs/rest-service/) - Building a RESTful Web Service
