@@ -1,6 +1,8 @@
 # Front End
 
-Este componente es el front end del Portal Transaccional. Permite iniciar sesión utilizando una cuenta de Google o una cuenta local, para lo cual utiliza una instancia de Azure AD B2C de Microsoft.
+Este componente es el front-end del Portal Transaccional. Permite iniciar sesión utilizando una cuenta de Google o una cuenta local, para lo cual utiliza una instancia de Azure AD B2C de Microsoft. Con la sesión iniciada, permite:
+- Hacer la consulta del perfil del usuario al servicio expuesto por el BFF. La consulta se hace con el usuario quemado en la URL (no el del usuario logueado) y el resultado se imprime en la consola.
+- Cerrar la sesión.
 
 ## Cómo empezar
 
@@ -31,6 +33,9 @@ Debe quedar algo como esto:
   }
 ```
 
+### Configurar el proxy
+Para consumir los servicios del BFF (https://localhost:5001) usando el CLI, se debe configurar un proxy. Esta configuración se hace en el archivo `proxy.config.json`.
+
 ### Instalar las dependencias
 
 ```
@@ -40,9 +45,11 @@ $ npm install
 ### Ejecutar y probar la aplicación
 
 ```
-$ npm serve -o
+$ npm serve --proxy-config proxy.conf.json -o
 ```
 
 ## Referencias
 
 - [@azure/msal-angular](https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-angular/README.md) - Microsoft Authentication Library for Angular
+- [Angular - HttpClient](https://angular.io/guide/http) - Guía para el uso de HttpClient
+- [Proxy To Backend](https://github.com/angular/angular-cli/blob/master/docs/documentation/stories/proxy.md) - Proxy To Backend en Angular CLI

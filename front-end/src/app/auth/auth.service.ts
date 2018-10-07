@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import { MsalService } from '@azure/msal-angular';
 import { environment } from './../../environments/environment';
-import { User } from 'msal';
 
 @Injectable()
 export class AuthService {
   forgottenPassword : boolean
 
-  constructor(private msalService : MsalService) {
+  constructor(private msalService: MsalService) {
     this.forgottenPassword = false;
   }
 
