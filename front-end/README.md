@@ -4,7 +4,7 @@ Este componente es el front end del Portal Transaccional. Permite iniciar sesió
 
 ## Cómo empezar
 
-Este componente es un SPA construido con Angular 5 y Bootstrap. Hace uso de Microsoft __Authentication Library for Angular__ para la comunicación con Azure AD B2C.
+Este componente es un SPA construido con Angular 5 y Bootstrap. Hace uso de Microsoft Authentication Library for Angular para la comunicación con Azure AD B2C.
 
 ### Prerrequisitos
 
@@ -14,11 +14,11 @@ Regitrar la aplicación en Azure AD B2C para obtener el clientID:
 ### Configurar los parámetros de autenticación
 
 Editar el archivo `enviroments/enviroments.ts` completando los siguiente parámetros con la información adecuada asociada a la configuración de Azure AD B2C:
-- clientID: es el valor del `Application ID` de la aplicación
-- authoritySuSi: es la política de `sign-up or sign-in`
-- authorityPR: es la política de `password reset`
-- b2cScopes: el/los `scope`
-- cacheLocation: la ubicación del caché, puede ser `sessionstorage` (valor por defecto) o `localStorage`
+- `clientID`: es el valor del `Application ID` de la aplicación
+- `authoritySuSi`: es la política de `sign-up or sign-in`
+- `authorityPR`: es la política de `password reset`
+- `b2cScopes`: el/los `scope`
+- `cacheLocation`: la ubicación del caché, puede ser `sessionstorage` (valor por defecto) o `localStorage`
 
 Debe quedar algo como esto:
 ```
