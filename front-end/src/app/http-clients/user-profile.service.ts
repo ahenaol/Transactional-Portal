@@ -7,8 +7,8 @@ export class UserProfileService {
 
   constructor(private http: HttpClient) { }
 
-  getUserProfile(): Observable<HttpResponse<any>> {
-    return this.http.get<any>('/api/values/get?email=alejo@gmail.com',
+  getUserProfile(email): Observable<HttpResponse<any>> {
+    return this.http.get<any>('/api/values/get?email=' + email,
       { observe: 'response' });
   }
 }

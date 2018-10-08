@@ -19,6 +19,10 @@ export class AppComponent {
     this.authService.logout();
   }
 
+  get isLoggedIn() {
+    return this.authService.isLoggedIn();
+  }
+
   get getUserName() {
     var userName = this.authService.getUserName();
     if(userName) {
@@ -32,16 +36,19 @@ export class AppComponent {
     return "";
   }
 
-  get isLoggedIn() {
-    return this.authService.isLoggedIn();
-  }
-
   get getEmail() {
     return this.authService.getEmail();
   }
 
   getProfile() {
-    this.userProfileService.getUserProfile().subscribe(
+    var email = this.authService.getEmail();
+
+    if(!email) {
+      console.log("No se pasó el usuario. Revisar la información del idToken.");
+      return;
+    }
+
+    this.userProfileService.getUserProfile(email).subscribe(
       result => {
         if(result.status == 200) {
           console.log(result.body);

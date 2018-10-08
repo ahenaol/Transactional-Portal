@@ -31,10 +31,10 @@ namespace bff_test1.Controllers
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("User-Agent", "Transactional-Portal");
 
-            // var handler = new HttpClientHandler();
-            // handler.Proxy = new WebProxy("http://proxy.epm.com.co:8080", true) { UseDefaultCredentials = true };
-            // HttpClient client = new HttpClient(handler);
-            HttpClient client = new HttpClient();
+            var handler = new HttpClientHandler();
+            handler.Proxy = new WebProxy("http://proxy.epm.com.co:8080", true) { UseDefaultCredentials = true };
+            HttpClient client = new HttpClient(handler);
+            // HttpClient client = new HttpClient();
 
             HttpResponseMessage response;
             try

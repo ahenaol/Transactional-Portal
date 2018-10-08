@@ -45,7 +45,7 @@ $ npm install
 ### Ejecutar y probar la aplicación
 
 ```
-$ npm serve --proxy-config proxy.conf.json -o
+$ ng serve --proxy-config proxy.conf.json -o
 ```
 
 ## Referencias
