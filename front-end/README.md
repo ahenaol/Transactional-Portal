@@ -53,3 +53,4 @@ $ ng serve --proxy-config proxy.conf.json -o
 - [@azure/msal-angular](https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-angular/README.md) - Microsoft Authentication Library for Angular
 - [Angular - HttpClient](https://angular.io/guide/http) - Guía para el uso de HttpClient
 - [Proxy To Backend](https://github.com/angular/angular-cli/blob/master/docs/documentation/stories/proxy.md) - Proxy To Backend en Angular CLI
+- [Angular Tutorial](https://angular.io/tutorial) - Tutorial: Tour of Heroes
