@@ -2,7 +2,7 @@
   <span class="navbar-brand mb-0 h1">Portal Transaccional</span>
   <ul class="navbar-nav" *ngIf="isLoggedIn">
     <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+      <a class="nav-link dropdown-toggle text-dark" href="#" id="navbardrop" data-toggle="dropdown">
         {{getUserName}}
       </a>
       <div class="dropdown-menu">
@@ -15,3 +15,5 @@
       <button class="btn btn-outline-secondary" type="button" (click)="login()">Login</button>
   </form>
 </nav>
+
+<app-dashboard></app-dashboard>
