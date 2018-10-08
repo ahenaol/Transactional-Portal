@@ -1,9 +1,9 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light d-flex flex-row justify-content-between">
   <span class="navbar-brand mb-0 h1">Portal Transaccional</span>
-  <ul class="navbar-nav" *ngIf="authService.isLoggedIn">
+  <ul class="navbar-nav" *ngIf="isLoggedIn">
     <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-        {{authService.getUserName}}
+        {{getUserName}}
       </a>
       <div class="dropdown-menu">
           <a class="dropdown-item" href="#" (click)="getProfile()">Perfil</a>
@@ -11,7 +11,7 @@
       </div>
     </li>
   </ul>
-  <form class="form-inline" *ngIf="!authService.isLoggedIn">
+  <form class="form-inline" *ngIf="!isLoggedIn">
       <button class="btn btn-outline-secondary" type="button" (click)="login()">Login</button>
   </form>
 </nav>

@@ -19,6 +19,27 @@ export class AppComponent {
     this.authService.logout();
   }
 
+  get getUserName() {
+    var userName = this.authService.getUserName();
+    if(userName) {
+      return userName;
+    } else {
+      userName = this.authService.getEmail();
+      if (userName) {
+        return userName;
+      }
+    }
+    return "";
+  }
+
+  get isLoggedIn() {
+    return this.authService.isLoggedIn();
+  }
+
+  get getEmail() {
+    return this.authService.getEmail();
+  }
+
   getProfile() {
     this.userProfileService.getUserProfile().subscribe(
       result => {

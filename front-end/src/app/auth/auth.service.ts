@@ -38,14 +38,27 @@ export class AuthService {
     this.msalService.logout();
   }
 
-  get isLoggedIn(): boolean {
+  isLoggedIn() {
     if (this.msalService.getUser()) {      
       return true;
     }
     return false;
   }
 
-  get getUserName(): string {
+  getEmail() {
+    var user = this.msalService.getUser();
+    if(user) {
+      if(user.idToken.hasOwnProperty("emails")) {
+        return user.idToken["emails"][0];
+      } else {
+        return null;
+      }
+    } else {
+      return null;
+    }
+  }
+
+  getUserName() {
     var user = this.msalService.getUser();
     if (user) {
       return user.name;
