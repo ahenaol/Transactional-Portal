@@ -1,7 +1,8 @@
 # Front End
 
 Este componente es el front-end del Portal Transaccional. Permite iniciar sesión utilizando una cuenta de Google o una cuenta local, para lo cual utiliza una instancia de Azure AD B2C de Microsoft. Con la sesión iniciada, permite:
-- Hacer la consulta del perfil del usuario al servicio expuesto por el BFF. La consulta se hace con el usuario quemado en la URL (no el del usuario logueado) y el resultado se imprime en la consola.
+- Navegar entre el Landing Page y el Porfil de Usuario.
+- Hacer la consulta del perfil del usuario al servicio expuesto por el BFF (el método está implementado pero no se implementó el llamado a este).
 - Cerrar la sesión.
 
 ## Cómo empezar
@@ -54,3 +55,4 @@ $ ng serve --proxy-config proxy.conf.json -o
 - [Angular - HttpClient](https://angular.io/guide/http) - Guía para el uso de HttpClient
 - [Proxy To Backend](https://github.com/angular/angular-cli/blob/master/docs/documentation/stories/proxy.md) - Proxy To Backend en Angular CLI
 - [Angular Tutorial](https://angular.io/tutorial) - Tutorial: Tour of Heroes
+- [Reactive Forms](https://angular.io/guide/reactive-forms) - Reactive Forms en Angular
