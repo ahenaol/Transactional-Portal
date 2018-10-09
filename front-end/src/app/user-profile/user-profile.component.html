@@ -3,9 +3,8 @@
 
   <form [formGroup]="userProfileForm" (ngSubmit)="onSubmit()" novalidate>
     <div formGroupName="aboutData" novalidate>
-
       <div class="form-group">
-        <label>Email:</label>
+        <label>Correo Electrónico:</label>
         <input class="form-control" formControlName="email" readonly>
       </div>
 
@@ -15,58 +14,52 @@
       </div>
 
       <div class="form-group">
-        <label>Tipo de ID:</label>
+        <label>Tipo de Identificación:</label>
         <select class="form-control" formControlName="idType">
           <option *ngFor="let idType of idTypes" [value]="idType">{{idType}}</option>
         </select>
       </div>
 
       <div class="form-group">
-        <label>Número de ID:</label>
+        <label>Número de Identificación:</label>
         <input class="form-control" formControlName="idNumber">
       </div>
 
       <div class="form-group">
-        <label>Fecha de nacimiento:</label>
+        <label>Fecha de Nacimiento:</label>
         <input class="form-control" formControlName="birthday">
       </div>
-
     </div>
+
+    <div formGroupName="addressData" novalidate>
+      <div class="form-group">
+        <label>Departamento:</label>
+        <input class="form-control" formControlName="state">
+      </div>
+
+      <div class="form-group">
+        <label>Ciudad:</label>
+        <input class="form-control" formControlName="city">
+      </div>
+
+      <div class="form-group">
+        <label>Dirección:</label>
+        <input class="form-control" formControlName="address">
+      </div>
+    </div>
+
+    <div formGroupName="contactData" novalidate>
+      <div class="form-group">
+        <label>Teléfono Fijo:</label>
+        <input class="form-control" formControlName="homePhone">
+      </div>
+
+      <div class="form-group">
+        <label>Teléfono Celular:</label>
+        <input class="form-control" formControlName="cellPhone">
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-default">Actualizar Información</button>
   </form>
-
 </div>
-
-<!-- <form [formGroup]="userProfileForm" (ngSubmit)="onSubmit()" novalidate>
-  <div formGroupName="personalData" novalidate>
-
-
-    <div class="form-group">
-      <label>Fecha de nacimiento:<input class="form-control" formControlName="birthday"></label>
-    </div>
-  </div>
-
-  <div class="form-group" formGroupName="contactData" novalidate>
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label>Departamento:<input class="form-control" formControlName="state"></label>
-      </div>
-      <div class="form-group col-md-6">
-        <label>Ciudad:<input class="form-control" formControlName="city"></label>
-      </div>
-    </div>
-    <div class="form-group">
-      <label>Dirección:<input class="form-control" formControlName="address"></label>
-    </div>
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label>Teléfono fijo:<input class="form-control" formControlName="homePhone"></label>
-      </div>
-      <div class="form-group col-md-6">
-        <label>Teléfono celular:<input class="form-control" formControlName="cellPhone"></label>
-      </div>
-    </div>
-  </div>
-
-  <button class="btn btn-basic" type="submit" [disabled]="userProfileForm.pristine">Guardar</button>
-  <button class="btn btn-basic" type="reset" (click)="revert()" [disabled]="userProfileForm.pristine">Descartar</button>
-</form> -->
