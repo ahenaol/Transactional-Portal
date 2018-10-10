@@ -58,7 +58,7 @@ export class UserProfileComponent implements OnInit {
     this.userProfileService.getUserProfile(email).subscribe(
       result => {
         if (result.status == 200) {
-          this.userProfile = { ... result.body };
+          this.userProfile = { ...result.body };
 
           this.userProfileForm.patchValue({
             aboutData: {
@@ -85,16 +85,28 @@ export class UserProfileComponent implements OnInit {
         }
       },
       error => {
-        console.log("Error: " + error.status + " " + error.statusText)
+        console.log("Error: " + error.status + " " + error.statusText);
         // console.log(error.error);
       }
     );
   }
 
   onSubmit() {
+    this.userProfile = {
+      ...this.userProfileForm.value.aboutData,
+      ...this.userProfileForm.value.addressData,
+      ...this.userProfileForm.value.contactData
+    };
+
     this.userProfileService.setUserProfile(this.userProfile.email, this.userProfile).subscribe(
-      result => { console.log("Result: " + result.status) },
-      error => { console.log("Error: " + error) }
+      result => {
+        console.log("Result: " + result.status);
+        // Informar en el formulario el envío exitoso
+      },
+      error => {
+        console.log("Error: " + error.status + " " + error.statusText);
+        // Informar en el formulario el envío fallido
+      }
     );
   }
 
