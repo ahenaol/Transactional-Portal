@@ -59,6 +59,7 @@ export class UserProfileComponent implements OnInit {
       result => {
         if (result.status == 200) {
           this.userProfile = { ...result.body };
+          this.userProfileService.setUserProfileCache(this.userProfile);
 
           this.userProfileForm.patchValue({
             aboutData: {
@@ -79,7 +80,16 @@ export class UserProfileComponent implements OnInit {
             }
           });
         } else if (result.status == 204) {
-          console.log("No existe el usuario.");
+          // Si el usuario no exite en la BD, lo crea
+          this.userProfile = new UserProfile();
+          this.userProfile.name = email;
+          this.userProfile.email = email;
+          this.userProfile.birthday = "1980-01-01"; //////falla sin fecha
+          this.userProfileService.setUserProfile(this.userProfile.email, this.userProfile).subscribe(
+            result => {
+              this.userProfileService.setUserProfileCache(this.userProfile);
+            }
+          );
         } else {
           console.log("Error no identificado: " + result.status + " " + result.statusText);
         }
@@ -100,7 +110,7 @@ export class UserProfileComponent implements OnInit {
 
     this.userProfileService.setUserProfile(this.userProfile.email, this.userProfile).subscribe(
       result => {
-        console.log("Result: " + result.status);
+        this.userProfileService.setUserProfileCache(this.userProfile);
         // Informar en el formulario el envío exitoso
       },
       error => {

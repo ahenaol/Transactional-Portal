@@ -5,6 +5,7 @@ import { UserProfile } from './user-profile';
 
 @Injectable()
 export class UserProfileService {
+  userProfileCache: UserProfile;
 
   constructor(private http: HttpClient) { }
 
@@ -16,5 +17,13 @@ export class UserProfileService {
   setUserProfile(email, body) {
     return this.http.put('/api/values/put?email=' + email, body,
       { observe: 'response' });
+  }
+
+  getUserProfileCache() {
+    return this.userProfileCache;
+  }
+
+  setUserProfileCache(userProfile) {
+    this.userProfileCache = userProfile;
   }
 }
