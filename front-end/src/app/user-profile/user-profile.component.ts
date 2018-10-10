@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { AuthService } from '../auth/auth.service';
-import { UserProfileService } from '../http-clients/user-profile.service';
+import { AuthService } from '../auth.service';
+import { UserProfileService } from './user-profile.service';
 import { UserProfile } from './user-profile';
 
 @Component({

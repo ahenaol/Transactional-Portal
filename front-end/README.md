@@ -1,8 +1,9 @@
 # Front End
 
-Este componente es el front-end del Portal Transaccional. Permite iniciar sesión utilizando una cuenta de Google o una cuenta local, para lo cual utiliza una instancia de Azure AD B2C de Microsoft. Con la sesión iniciada, permite:
+Este componente es el front-end del Portal Transaccional. Permite iniciar sesión utilizando el proveedor de identidad Azure AD B2C, ya sea con una cuenta de Google o una cuenta local. Con la sesión iniciada, permite:
 - Navegar entre el Landing Page y el Porfil de Usuario.
-- Hacer la consulta del perfil del usuario al servicio expuesto por el BFF (el método está implementado pero no se implementó el llamado a este).
+- Cargar la información del perfil del usuario consumiento el servicio expuesto en el BFF.
+- Actualizar la información del perfil del usuario consumiento el servicio expuesto en el BFF.
 - Cerrar la sesión.
 
 ## Cómo empezar

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { AuthService } from './auth/auth.service';
-import { UserProfileService } from './http-clients/user-profile.service';
+import { AuthService } from './auth.service';
+import { UserProfileService } from './user-profile/user-profile.service';
 
 @Component({
   selector: 'app-root',
@@ -25,7 +25,7 @@ export class AppComponent {
 
   get getUserName() {
     var userName = this.authService.getUserName();
-    if(userName) {
+    if (userName) {
       return userName;
     } else {
       userName = this.authService.getEmail();
