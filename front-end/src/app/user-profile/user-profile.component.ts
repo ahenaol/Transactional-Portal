@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AuthService } from '../auth/auth.service';
 import { UserProfileService } from '../http-clients/user-profile.service';
+import { UserProfile } from './user-profile';
 
 @Component({
   selector: 'app-user-profile',
@@ -9,6 +10,7 @@ import { UserProfileService } from '../http-clients/user-profile.service';
   styleUrls: ['./user-profile.component.css']
 })
 export class UserProfileComponent implements OnInit {
+  userProfile: UserProfile;
   userProfileForm: FormGroup;
 
   idTypes = [
@@ -56,23 +58,24 @@ export class UserProfileComponent implements OnInit {
     this.userProfileService.getUserProfile(email).subscribe(
       result => {
         if (result.status == 200) {
-          // console.log(result.body);
+          this.userProfile = { ... result.body };
+
           this.userProfileForm.patchValue({
             aboutData: {
-              email: result.body.email,
-              name: result.body.name,
-              idType: result.body.idType,
-              idNumber: result.body.idNumber,
-              birthday: result.body.birthday
+              email: this.userProfile.email,
+              name: this.userProfile.name,
+              idType: this.userProfile.idType,
+              idNumber: this.userProfile.idNumber,
+              birthday: this.userProfile.birthday
             },
             addressData: {
-              state: result.body.state,
-              city: result.body.city,
-              address: result.body.address
+              state: this.userProfile.state,
+              city: this.userProfile.city,
+              address: this.userProfile.address
             },
             contactData: {
-              homePhone: result.body.homePhone,
-              cellPhone: result.body.cellPhone
+              homePhone: this.userProfile.homePhone,
+              cellPhone: this.userProfile.cellPhone
             }
           });
         } else if (result.status == 204) {
@@ -89,7 +92,10 @@ export class UserProfileComponent implements OnInit {
   }
 
   onSubmit() {
-    this.userProfileService.setUserProfile();
+    this.userProfileService.setUserProfile(this.userProfile.email, this.userProfile).subscribe(
+      result => { console.log("Result: " + result.status) },
+      error => { console.log("Error: " + error) }
+    );
   }
 
   ngOnInit() {

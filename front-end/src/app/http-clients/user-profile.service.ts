@@ -1,18 +1,20 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
+import { UserProfile } from '../user-profile/user-profile';
 
 @Injectable()
 export class UserProfileService {
 
   constructor(private http: HttpClient) { }
 
-  getUserProfile(email): Observable<HttpResponse<any>> {
-    return this.http.get<any>('/api/values/get?email=' + email,
+  getUserProfile(email): Observable<HttpResponse<UserProfile>> {
+    return this.http.get<UserProfile>('/api/values/get?email=' + email,
       { observe: 'response' });
   }
 
-  setUserProfile() {
-    console.log("setUserProfile()");
+  setUserProfile(email, body) {
+    return this.http.put('/api/values/put?email=' + email, body,
+      { observe: 'response' });
   }
 }
