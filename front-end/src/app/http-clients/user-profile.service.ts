@@ -11,4 +11,8 @@ export class UserProfileService {
     return this.http.get<any>('/api/values/get?email=' + email,
       { observe: 'response' });
   }
+
+  setUserProfile() {
+    console.log("setUserProfile()");
+  }
 }

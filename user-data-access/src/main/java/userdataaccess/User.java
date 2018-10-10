@@ -12,7 +12,7 @@ public class User {
 	private String email;
 	@Column(length = 64)
 	private String name;
-	@Column(length = 8)
+	@Column(length = 32)
 	private String idType;
 	@Column(length = 16)
 	private String idNumber;
