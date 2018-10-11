@@ -40,11 +40,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   get getUserName() {
-    var userProfileCache = this.userProfileService.getUserProfileCache();
-    if (userProfileCache) {
-      return userProfileCache.name;
-    }
-    return "";
+    return this.userProfileService.getUserName();
   }
 
   setUserProfileCache() {
