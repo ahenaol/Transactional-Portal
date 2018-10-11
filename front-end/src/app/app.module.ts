@@ -1,8 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { MsalModule } from '@azure/msal-angular';
+import { MsalModule, MsalInterceptor } from '@azure/msal-angular';
 import { RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { AuthService } from './auth.service';
 import { UserProfileService } from './user-profile/user-profile.service';
@@ -11,6 +11,10 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { ReactiveFormsModule } from '@angular/forms';
+
+export const protectedResourceMap: [string, string[]][] = [
+  ['/api/values/', ['https://ahenaol.onmicrosoft.com/bff/user_impersonation']]
+];
 
 @NgModule({
   declarations: [AppComponent, DashboardComponent, UserProfileComponent],
@@ -24,11 +28,15 @@ import { ReactiveFormsModule } from '@angular/forms';
       authority: 'https://login.microsoftonline.com/tfp/ahenaol.onmicrosoft.com/B2C_1_SiUpIn',
       redirectUri: 'http://localhost:4200/',
       cacheLocation: 'localStorage',
-      postLogoutRedirectUri: 'http://localhost:4200/'
+      postLogoutRedirectUri: 'http://localhost:4200/',
+      // unprotectedResources: ["https://www.microsoft.com/en-us/"],
+      protectedResourceMap: protectedResourceMap
     }),
     AppRoutingModule
   ],
-  providers: [AuthService, UserProfileService],
+  providers: [AuthService, UserProfileService,
+    { provide: HTTP_INTERCEPTORS, useClass: MsalInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

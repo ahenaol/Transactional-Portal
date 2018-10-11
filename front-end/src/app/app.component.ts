@@ -49,31 +49,31 @@ export class AppComponent implements OnInit, OnDestroy {
 
   setUserProfileCache() {
     var email = this.authService.getEmail();
-    if (email) {
-      this.userProfileService.getUserProfile(email).subscribe(
-        result => {
-          if (result.status == 200) {
-            var userProfile: UserProfile = { ...result.body };
-            this.userProfileService.setUserProfileCache(userProfile);
-          } else if (result.status == 204) {
-            // Parte de esta lógia también se implementa en user-profile.component.ts,
-            // si se hace un cambio acá, se debe validar si aplica allá.
-            // El usuario no exite en la BD, entonces lo crea.
-            // Nombre e email del userProfile = email.
-            var userProfile = new UserProfile();
-            userProfile.name = email;
-            userProfile.email = email;
-            userProfile.birthday = "1900-01-01"; // ----> falla sin no se pone fecha
-            this.userProfileService.setUserProfile(userProfile.email, userProfile).subscribe(
-              result => {
-                // Guarda el usuario creado en el caché
-                this.userProfileService.setUserProfileCache(userProfile);
-              }
-            );
-          }
+    if (!email) return;
+
+    this.userProfileService.getUserProfile(email).subscribe(
+      result => {
+        if (result.status == 200) {
+          var userProfile: UserProfile = { ...result.body };
+          this.userProfileService.setUserProfileCache(userProfile);
+        } else if (result.status == 204) {
+          // Parte de esta lógia también se implementa en user-profile.component.ts,
+          // si se hace un cambio acá, se debe validar si aplica allá.
+          // El usuario no exite en la BD, entonces lo crea.
+          // Nombre e email del userProfile = email.
+          var userProfile = new UserProfile();
+          userProfile.name = email;
+          userProfile.email = email;
+          userProfile.birthday = "1900-01-01"; // ----> falla sin no se pone fecha
+          this.userProfileService.setUserProfile(userProfile.email, userProfile).subscribe(
+            result => {
+              // Guarda el usuario creado en el caché
+              this.userProfileService.setUserProfileCache(userProfile);
+            }
+          );
         }
-      );
-    }
+      }
+    );
   }
 
   ngOnInit() {
