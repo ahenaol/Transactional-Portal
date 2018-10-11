@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import { MsalService } from '@azure/msal-angular';
 import { environment } from '../environments/environment';
-import { UserProfileService } from './user-profile/user-profile.service';
 
 @Injectable()
 export class AuthService {
   forgottenPassword: boolean
 
-  constructor(private msalService: MsalService, private userProfileService: UserProfileService) {
+  constructor(private msalService: MsalService) {
     this.forgottenPassword = false;
   }
 
@@ -35,7 +34,6 @@ export class AuthService {
   }
 
   logout() {
-    console.log("logout");
     this.msalService.logout();
   }
 

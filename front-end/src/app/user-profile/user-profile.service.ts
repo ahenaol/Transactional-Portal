@@ -26,4 +26,8 @@ export class UserProfileService {
   setUserProfileCache(userProfile) {
     this.userProfileCache = userProfile;
   }
+
+  cleanUserProfileCache() {
+    this.userProfileCache = new UserProfile();
+  }
 }

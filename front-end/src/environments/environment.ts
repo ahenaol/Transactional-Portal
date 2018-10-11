@@ -9,6 +9,7 @@ export const environment = {
     clientID: '71dc04ab-73ed-4368-863e-4fa1550fe2fb',
     authoritySuSi: 'https://login.microsoftonline.com/tfp/ahenaol.onmicrosoft.com/B2C_1_SiUpIn',
     authorityPR: 'https://login.microsoftonline.com/tfp/ahenaol.onmicrosoft.com/B2C_1_SSPR',
+    redirectUri: 'http://localhost:4200/',
     b2cScopes: ['https://ahenaol.onmicrosoft.com/portal-transaccional/user.read'],
     cacheLocation: 'localStorage'
   }

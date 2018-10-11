@@ -80,13 +80,17 @@ export class UserProfileComponent implements OnInit {
             }
           });
         } else if (result.status == 204) {
-          // Si el usuario no exite en la BD, lo crea
+          // Parte de esta lógia también se implementa en app.component.ts,
+          // si se hace un cambio acá, se debe validar si aplica allá.
+          // El usuario no exite en la BD, entonces lo crea.
+          // Nombre e email del userProfile = email.
           this.userProfile = new UserProfile();
           this.userProfile.name = email;
           this.userProfile.email = email;
-          this.userProfile.birthday = "1980-01-01"; //////falla sin fecha
+          this.userProfile.birthday = "1900-01-01"; // ----> falla sin no se pone fecha
           this.userProfileService.setUserProfile(this.userProfile.email, this.userProfile).subscribe(
             result => {
+              // Guarda el usuario creado en el caché
               this.userProfileService.setUserProfileCache(this.userProfile);
             }
           );

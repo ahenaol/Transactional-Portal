@@ -19,10 +19,12 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forRoot([]),
-    MsalModule.forRoot({
+    MsalModule.forRoot({ // TODO: tomar esto de las variables de entorno
       clientID: '71dc04ab-73ed-4368-863e-4fa1550fe2fb',
       authority: 'https://login.microsoftonline.com/tfp/ahenaol.onmicrosoft.com/B2C_1_SiUpIn',
-      cacheLocation: 'localStorage'
+      redirectUri: 'http://localhost:4200/',
+      cacheLocation: 'localStorage',
+      postLogoutRedirectUri: 'http://localhost:4200/'
     }),
     AppRoutingModule
   ],
