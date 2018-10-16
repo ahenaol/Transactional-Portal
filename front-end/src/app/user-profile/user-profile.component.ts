@@ -52,6 +52,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   prepopulateForm() {
+    this.userProfileForm.disable();
     var email = this.authService.getEmail();
 
     if (!email) {
@@ -83,6 +84,8 @@ export class UserProfileComponent implements OnInit {
               cellPhone: this.userProfile.cellPhone
             }
           });
+
+          this.userProfileForm.enable();
         } else if (result.status == 204) {
           // Parte de esta lógia también se implementa en app.component.ts,
           // si se hace un cambio acá, se debe validar si aplica allá.
@@ -98,6 +101,8 @@ export class UserProfileComponent implements OnInit {
               this.userProfileService.setUserProfileCache(this.userProfile);
             }
           );
+
+          this.userProfileForm.enable();
         } else {
           console.log("Error no identificado: " + result.status + " " + result.statusText);
         }
@@ -110,6 +115,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   onSubmit() {
+    this.userProfileForm.disable();
     this.userProfile = {
       ...this.userProfileForm.value.aboutData,
       ...this.userProfileForm.value.addressData,
@@ -122,12 +128,14 @@ export class UserProfileComponent implements OnInit {
         // Informar en el formulario el envío exitoso
         this.modalText = "Tu información se actualizó correctamente";
         this.modalService.open(this.content, { centered: true }).result;
+        this.userProfileForm.enable();
       },
       error => {
         console.log("Error: " + error.status + " " + error.statusText);
         // Informar en el formulario el envío fallido
         this.modalText = "Hubo un error actualizando tu información";
         this.modalService.open(this.content, { centered: true }).result;
+        this.userProfileForm.enable();
       }
     );
   }
