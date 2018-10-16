@@ -9,8 +9,8 @@ import { UserProfileService } from './user-profile/user-profile.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { AppRoutingModule } from './app-routing.module';
-
 import { ReactiveFormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 export const protectedResourceMap: [string, string[]][] = [
   ['/api/values/', ['https://ahenaol.onmicrosoft.com/bff/user_impersonation']]
@@ -19,6 +19,7 @@ export const protectedResourceMap: [string, string[]][] = [
 @NgModule({
   declarations: [AppComponent, DashboardComponent, UserProfileComponent],
   imports: [
+    NgbModule.forRoot(),
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,

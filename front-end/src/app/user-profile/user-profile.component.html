@@ -63,3 +63,17 @@
     <button type="submit" class="btn btn-default">Actualizar Información</button>
   </form>
 </div>
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="h4">Información Personal</h4>
+  </div>
+
+  <div class="modal-body">
+    <h4 class="lead">{{ modalText }}</h4>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Cerrar</button>
+  </div>
+</ng-template>
