@@ -1,170 +1,82 @@
 <div class="container w-50 my-5">
 
-  <div class="row">
-
-    <div class="col-3">
-      <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-        <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab"
-          aria-controls="v-pills-home" aria-selected="true">Acerca de</a>
-        <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab"
-          aria-controls="v-pills-profile" aria-selected="false">Dirección</a>
-        <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab"
-          aria-controls="v-pills-messages" aria-selected="false">Contacto</a>
-      </div>
-    </div>
-
-    <div class="col-9">
-      <form [formGroup]="userProfileForm" (ngSubmit)="onSubmit()" novalidate>
-        <div class="tab-content" id="v-pills-tabContent">
-
-          <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-            <div formGroupName="aboutData" novalidate>
-              <div class="form-group">
-                <label>Correo Electrónico:</label>
-                <input class="form-control" formControlName="email" readonly>
-              </div>
-
-              <div class="form-group">
-                <label>Nombre:</label>
-                <input class="form-control" formControlName="name">
-              </div>
-
-              <div class="form-group">
-                <label>Tipo de Identificación:</label>
-                <select class="form-control" formControlName="idType">
-                  <option *ngFor="let idType of idTypes" [value]="idType">{{idType}}</option>
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label>Número de Identificación:</label>
-                <input class="form-control" formControlName="idNumber">
-              </div>
-
-              <div class="form-group">
-                <label>Fecha de Nacimiento:</label>
-                <input class="form-control" formControlName="birthday">
-              </div>
-            </div>
-          </div>
-
-          <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-            <div formGroupName="addressData" novalidate>
-              <div class="form-group">
-                <label>Departamento:</label>
-                <input class="form-control" formControlName="state">
-              </div>
-
-              <div class="form-group">
-                <label>Ciudad:</label>
-                <input class="form-control" formControlName="city">
-              </div>
-
-              <div class="form-group">
-                <label>Dirección:</label>
-                <input class="form-control" formControlName="address">
-              </div>
-            </div>
-          </div>
-
-          <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
-            <div formGroupName="contactData" novalidate>
-              <div class="form-group">
-                <label>Teléfono Fijo:</label>
-                <input class="form-control" formControlName="homePhone">
-              </div>
-
-              <div class="form-group">
-                <label>Teléfono Celular:</label>
-                <input class="form-control" formControlName="cellPhone">
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        <button type="submit" class="btn btn-default">Actualizar Información</button>
-
-      </form>
-    </div>
-  </div>
-
-
-  <!-- <h2>Información Personal</h2>
+  <p class="h1">Información Personal</p>
+  <p class="h6">{{ getEmail }}</p>
 
   <form [formGroup]="userProfileForm" (ngSubmit)="onSubmit()" novalidate>
-    <div formGroupName="aboutData" novalidate>
-      <div class="form-group">
-        <label>Correo Electrónico:</label>
-        <input class="form-control" formControlName="email" readonly>
-      </div>
 
-      <div class="form-group">
-        <label>Nombre:</label>
-        <input class="form-control" formControlName="name">
-      </div>
-
-      <div class="form-group">
-        <label>Tipo de Identificación:</label>
-        <select class="form-control" formControlName="idType">
-          <option *ngFor="let idType of idTypes" [value]="idType">{{idType}}</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label>Número de Identificación:</label>
-        <input class="form-control" formControlName="idNumber">
-      </div>
-
-      <div class="form-group">
-        <label>Fecha de Nacimiento:</label>
-        <input class="form-control" formControlName="birthday">
+    <div formGroupName="aboutData" class="card bg-light mt-4" novalidate>
+      <p class="card-header h5">Acerca de</p>
+      <div class="card-body">
+        <div class="form-group">
+          <label class="font-weight-bold">Nombre:</label>
+          <input class="form-control" formControlName="name">
+        </div>
+        <div class="form-group">
+          <label class="font-weight-bold">Tipo de Identificación:</label>
+          <select class="form-control" formControlName="idType">
+            <option *ngFor="let idType of idTypes" [value]="idType">{{idType}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="font-weight-bold">Número de Identificación:</label>
+          <input class="form-control" formControlName="idNumber">
+        </div>
+        <div class="form-group">
+          <label class="font-weight-bold">Fecha de Nacimiento:</label>
+          <input class="form-control" formControlName="birthday">
+        </div>
       </div>
     </div>
 
-    <div formGroupName="addressData" novalidate>
-      <div class="form-group">
-        <label>Departamento:</label>
-        <input class="form-control" formControlName="state">
-      </div>
-
-      <div class="form-group">
-        <label>Ciudad:</label>
-        <input class="form-control" formControlName="city">
-      </div>
-
-      <div class="form-group">
-        <label>Dirección:</label>
-        <input class="form-control" formControlName="address">
-      </div>
-    </div>
-
-    <div formGroupName="contactData" novalidate>
-      <div class="form-group">
-        <label>Teléfono Fijo:</label>
-        <input class="form-control" formControlName="homePhone">
-      </div>
-
-      <div class="form-group">
-        <label>Teléfono Celular:</label>
-        <input class="form-control" formControlName="cellPhone">
+    <div formGroupName="addressData" class="bg-light card mt-4" novalidate>
+      <p class="card-header h5">Dirección</p>
+      <div class="card-body">
+        <div class="form-group">
+          <label class="font-weight-bold">Departamento:</label>
+          <input class="form-control" formControlName="state">
+        </div>
+        <div class="form-group">
+          <label class="font-weight-bold">Ciudad:</label>
+          <input class="form-control" formControlName="city">
+        </div>
+        <div class="form-group">
+          <label class="font-weight-bold">Dirección:</label>
+          <input class="form-control" formControlName="address">
+        </div>
       </div>
     </div>
 
-    <button type="submit" class="btn btn-default">Actualizar Información</button>
+    <div formGroupName="contactData" class="bg-light card mt-4" novalidate>
+      <p class="card-header h5">Contacto</p>
+      <div class="card-body">
+        <div class="form-group">
+          <label class="font-weight-bold">Teléfono Fijo:</label>
+          <input class="form-control" formControlName="homePhone">
+        </div>
+        <div class="form-group">
+          <label class="font-weight-bold">Teléfono Celular:</label>
+          <input class="form-control" formControlName="cellPhone">
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-4 text-center">
+      <button type="submit" class="btn btn-default">Actualizar Información</button>
+    </div>
   </form>
-</div> -->
+</div>
 
-  <ng-template #content let-c="close" let-d="dismiss">
-    <div class="modal-header">
-      <h4 class="h4">Información Personal</h4>
-    </div>
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <p class="h4">Información Personal</p>
+  </div>
 
-    <div class="modal-body">
-      <h4 class="lead">{{ modalText }}</h4>
-    </div>
+  <div class="modal-body">
+    <h4 class="lead">{{ modalText }}</h4>
+  </div>
 
-    <div class="modal-footer">
-      <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Cerrar</button>
-    </div>
-  </ng-template>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Cerrar</button>
+  </div>
+</ng-template>

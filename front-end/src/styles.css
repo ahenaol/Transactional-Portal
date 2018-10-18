@@ -1,2 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap/dist/css/bootstrap.css";
+
+/* Compensa el comportamiento del Navbar con la propiedad fixed-top en app.component.html */
+body { padding-top: 50px; }

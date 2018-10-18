@@ -30,6 +30,10 @@ export class UserProfileComponent implements OnInit {
     this.userProfileForm = this.createUserProfileForm();
   }
 
+  get getEmail() {
+    return this.authService.getEmail();
+  }
+
   createUserProfileForm() {
     return this.formBuilder.group({
       aboutData: this.formBuilder.group({
