@@ -1,9 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { UserProfileService } from './user-profile.service';
 import { UserProfile } from './user-profile';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-user-profile',
@@ -14,7 +13,6 @@ export class UserProfileComponent implements OnInit {
   @ViewChild('content') content: ElementRef;
   userProfile: UserProfile;
   userProfileForm: FormGroup;
-  modalText;
 
   idTypes = [
     'Cédula de ciudadanía',
@@ -24,9 +22,7 @@ export class UserProfileComponent implements OnInit {
     'Tarjeta de identidad'
   ];
 
-  constructor(private authService: AuthService,
-    private userProfileService: UserProfileService, private formBuilder: FormBuilder,
-    private modalService: NgbModal) {
+  constructor(private authService: AuthService, private userProfileService: UserProfileService, private formBuilder: FormBuilder) {
     this.userProfileForm = this.createUserProfileForm();
   }
 
@@ -130,15 +126,11 @@ export class UserProfileComponent implements OnInit {
       result => {
         this.userProfileService.setUserProfileCache(this.userProfile);
         // Informar en el formulario el envío exitoso
-        this.modalText = "Tu información se actualizó correctamente";
-        this.modalService.open(this.content, { centered: true }).result;
         this.userProfileForm.enable();
       },
       error => {
         console.log("Error: " + error.status + " " + error.statusText);
         // Informar en el formulario el envío fallido
-        this.modalText = "Hubo un error actualizando tu información";
-        this.modalService.open(this.content, { centered: true }).result;
         this.userProfileForm.enable();
       }
     );

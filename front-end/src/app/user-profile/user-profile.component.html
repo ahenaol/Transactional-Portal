@@ -1,4 +1,4 @@
-<div class="container w-50 my-5">
+<div class="container w-50 my-4">
 
   <p class="h1">Información Personal</p>
   <p class="h6">{{ getEmail }}</p>
@@ -8,37 +8,43 @@
     <div formGroupName="aboutData" class="card bg-light mt-4" novalidate>
       <p class="card-header h5">Acerca de</p>
       <div class="card-body">
-        <div class="form-group">
-          <label class="font-weight-bold">Nombre:</label>
-          <input class="form-control" formControlName="name">
+        <div class="form-row">
+          <div class="form-group col-md-7">
+            <label class="font-weight-bold">Nombre:</label>
+            <input class="form-control" formControlName="name">
+          </div>
+          <div class="form-group col-md-5">
+            <label class="font-weight-bold">Fecha de Nacimiento:</label>
+            <input type="date" class="form-control" formControlName="birthday">
+          </div>
         </div>
-        <div class="form-group">
-          <label class="font-weight-bold">Tipo de Identificación:</label>
-          <select class="form-control" formControlName="idType">
-            <option *ngFor="let idType of idTypes" [value]="idType">{{idType}}</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label class="font-weight-bold">Número de Identificación:</label>
-          <input class="form-control" formControlName="idNumber">
-        </div>
-        <div class="form-group">
-          <label class="font-weight-bold">Fecha de Nacimiento:</label>
-          <input class="form-control" formControlName="birthday">
+        <div class="form-row">
+          <div class="form-group col-md-7">
+            <label class="font-weight-bold">Tipo de Identificación:</label>
+            <select class="form-control" formControlName="idType">
+              <option *ngFor="let idType of idTypes" [value]="idType">{{idType}}</option>
+            </select>
+          </div>
+          <div class="form-group col-md-5">
+            <label class="font-weight-bold">Número de Identificación:</label>
+            <input class="form-control" formControlName="idNumber">
+          </div>
         </div>
       </div>
     </div>
 
     <div formGroupName="addressData" class="bg-light card mt-4" novalidate>
-      <p class="card-header h5">Dirección</p>
+      <p class="card-header h5">Ubicación</p>
       <div class="card-body">
-        <div class="form-group">
-          <label class="font-weight-bold">Departamento:</label>
-          <input class="form-control" formControlName="state">
-        </div>
-        <div class="form-group">
-          <label class="font-weight-bold">Ciudad:</label>
-          <input class="form-control" formControlName="city">
+        <div class="form-row">
+          <div class="form-group col">
+            <label class="font-weight-bold">Departamento:</label>
+            <input class="form-control" formControlName="state">
+          </div>
+          <div class="form-group col">
+            <label class="font-weight-bold">Ciudad:</label>
+            <input class="form-control" formControlName="city">
+          </div>
         </div>
         <div class="form-group">
           <label class="font-weight-bold">Dirección:</label>
@@ -50,13 +56,15 @@
     <div formGroupName="contactData" class="bg-light card mt-4" novalidate>
       <p class="card-header h5">Contacto</p>
       <div class="card-body">
-        <div class="form-group">
-          <label class="font-weight-bold">Teléfono Fijo:</label>
-          <input class="form-control" formControlName="homePhone">
-        </div>
-        <div class="form-group">
-          <label class="font-weight-bold">Teléfono Celular:</label>
-          <input class="form-control" formControlName="cellPhone">
+        <div class="form-row">
+          <div class="form-group col">
+            <label class="font-weight-bold">Teléfono Fijo:</label>
+            <input class="form-control" formControlName="homePhone">
+          </div>
+          <div class="form-group col">
+            <label class="font-weight-bold">Teléfono Celular:</label>
+            <input class="form-control" formControlName="cellPhone">
+          </div>
         </div>
       </div>
     </div>
@@ -66,17 +74,3 @@
     </div>
   </form>
 </div>
-
-<ng-template #content let-c="close" let-d="dismiss">
-  <div class="modal-header">
-    <p class="h4">Información Personal</p>
-  </div>
-
-  <div class="modal-body">
-    <h4 class="lead">{{ modalText }}</h4>
-  </div>
-
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Cerrar</button>
-  </div>
-</ng-template>
